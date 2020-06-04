@@ -3,8 +3,11 @@ package com.example.kotlincoroutines.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.kotlincoroutines.util.BACKGROUND
 import com.example.kotlincoroutines.util.singleArgViewModelFactory
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * MainViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
@@ -51,11 +54,10 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
         updateTaps()
     }
     // Wait one second then update the tap count.
-    private fun updateTaps() {
-        tapCount++
-        BACKGROUND.submit {
-            Thread.sleep(1_000)
-            _taps.postValue("${tapCount} taps")
+    fun updateTaps() {
+        viewModelScope.launch {
+            delay(1000)
+            _taps.postValue("${++tapCount} taps")
         }
     }
     // Called immediately after the UI shows the snackbar.
@@ -63,17 +65,31 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
         _snackBar.value = null
     }
     // Refresh the title, showing a loading spinner while it refreshes and errors via snackbar.
-    fun refreshTitle() {
-        _spinner.value = true
-        repository.refreshTitleWithCallbacks(object : TitleRefreshCallback {
-            override fun onCompleted() {
-                _spinner.postValue(false)
+    fun refreshTitle() = launchLoadData {
+        repository.refreshTitle()
+    }
+    /**
+     * Helper function to call a data load function with a loading spinner, errors will trigger a
+     * snackbar.
+     *
+     * By marking `block` as `suspend` this creates a suspend lambda which can call suspend
+     * functions.
+     *
+     * @param block lambda to actually load data. It is called in the viewModelScope. Before calling the
+     *              lambda the loading spinner will display, after completion or error the loading
+     *              spinner will stop
+     */
+    private fun launchLoadData(block: suspend () -> Unit): Unit {
+        viewModelScope.launch {
+            try {
+                _spinner.value = true
+                block()
+            }catch (error: TitleRefreshError) {
+                _snackBar.value = error.message
+            } finally {
+                _spinner.value = false
             }
+        }
 
-            override fun onError(cause: Throwable) {
-                _snackBar.postValue(cause.message)
-                _spinner.postValue(false)
-            }
-        })
     }
 }

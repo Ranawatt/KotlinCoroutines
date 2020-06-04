@@ -1,17 +1,19 @@
 package com.example.kotlincoroutines.main
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.app.AppComponentFactory
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlincoroutines.R
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             value?.let {
                 title.text = it
             }
+
         }
         viewModel.taps.observe(this) { value ->
             taps.text = value
