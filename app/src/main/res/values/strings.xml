@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KotlinCoroutines</string>
+    <string name="click_to_start">Start</string>
 </resources>
