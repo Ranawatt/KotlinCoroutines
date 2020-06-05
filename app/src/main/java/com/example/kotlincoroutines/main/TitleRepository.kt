@@ -25,23 +25,28 @@ class TitleRepository(val network: MainNetwork, val titleDao: TitleDao) {
      * the current tile.
      */
     suspend fun refreshTitle(){
-
-        withContext(Dispatchers.IO) {
-            val result = try {
-                // Make network request using a blocking call
-                network.fetchNextTitle().execute()
-            }catch (cause : Throwable) {
-                // If the network throws an exception, inform the caller
-                throw TitleRefreshError("Unable to Refresh Title ", cause)
-            }
-            if (result.isSuccessful){
-                // Save it to the database
-                titleDao.insertTitle(Title(result.body()!!))
-            }else{
-                // If it's not successful, inform the callback of the error
-                throw TitleRefreshError("Unable to Refresh Title ", null)
-            }
+        try {
+            val result = network.fetchNextTitle()
+            titleDao.insertTitle(Title(result))
+        }catch (cause: Throwable){
+            throw TitleRefreshError("Unable To Refresh Title ", null)
         }
+//        withContext(Dispatchers.IO) {
+//            val result = try {
+//                // Make network request using a blocking call
+//                network.fetchNextTitle().execute()
+//            }catch (cause : Throwable) {
+//                // If the network throws an exception, inform the caller
+//                throw TitleRefreshError("Unable to Refresh Title ", cause)
+//            }
+//            if (result.isSuccessful){
+//                // Save it to the database
+//                titleDao.insertTitle(Title(result.body()!!))
+//            }else{
+//                // If it's not successful, inform the callback of the error
+//                throw TitleRefreshError("Unable to Refresh Title ", null)
+//            }
+//        }
 
     }
 //    suspend fun refreshTitle() {
