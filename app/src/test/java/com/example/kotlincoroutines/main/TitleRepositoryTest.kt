@@ -1,5 +1,9 @@
 package com.example.kotlincoroutines.main
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.kotlincoroutines.fakes.MainNetworkCompletableFake
+import com.example.kotlincoroutines.fakes.MainNetworkFake
+import com.example.kotlincoroutines.fakes.TitleDaoFake
 import com.google.common.truth.Truth
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -9,20 +13,12 @@ import org.junit.Before
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Rule
 
 class TitleRepositoryTest {
 
-    @Before
-    fun setUp() {
-    }
-
-    @After
-    fun tearDown() {
-    }
-
-    @Test
-    fun getTitle() {
-    }
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Test
     fun whenRefreshTitleSuccess_insertsRows() = runBlockingTest{
@@ -57,11 +53,5 @@ class TitleRepositoryTest {
         advanceTimeBy(5_000)
     }
 
-    @Test
-    fun getNetwork() {
-    }
 
-    @Test
-    fun getTitleDao() {
-    }
 }

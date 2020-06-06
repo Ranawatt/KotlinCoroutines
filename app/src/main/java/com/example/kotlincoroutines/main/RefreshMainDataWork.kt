@@ -17,7 +17,6 @@ class RefreshMainDataWork(context: Context, params: WorkerParameters, private va
 
     /**
      * Refresh the title from the network using [TitleRepository]
-     *
      * WorkManager will call this method from a background thread. It may be called even
      * after our app has been terminated by the operating system, in which case [WorkManager] will
      * start just enough to run this [Worker].

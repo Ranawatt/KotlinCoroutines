@@ -11,7 +11,7 @@ buildscript {
         def coroutines_android_version = '1.3.4'
         def expresso_version = '3.2.0'
         def gson_version = '2.8.6'
-        def junit_version = '4.13'
+        def junit_version = '4.12'
         def lifecycle_version = '2.2.0'
         def livedata_version = '2.3.0-alpha03'
         def material_version = '1.1.0'

@@ -1,17 +1,24 @@
 package com.example.kotlincoroutines.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.kotlincoroutines.fakes.MainNetworkCompletableFake
 import com.example.kotlincoroutines.fakes.MainNetworkFake
 import com.example.kotlincoroutines.fakes.TitleDaoFake
 import com.example.kotlincoroutines.main.utils.MainCoroutineScopeRule
+import com.example.kotlincoroutines.main.utils.captureValues
 import com.example.kotlincoroutines.main.utils.getValueForTest
 import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.test.runBlockingTest
+import okhttp3.MediaType
+import okhttp3.ResponseBody
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import retrofit2.HttpException
+import retrofit2.Response
 
 @RunWith(JUnit4::class)
 class MainViewModelTest {
@@ -115,7 +122,8 @@ class MainViewModelTest {
     }
 
     private fun makeErrorResult(result: String): HttpException {
-        return HttpException(Response.error<String>(
+        return HttpException(
+            Response.error<String>(
             500,
             ResponseBody.create(
                 MediaType.get("application/json"),
