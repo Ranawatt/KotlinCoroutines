@@ -1,15 +1,15 @@
 package com.example.advanced_coroutine.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Path
-import android.graphics.RectF
 import android.util.AttributeSet
-import com.example.advanced_coroutine.R
+import com.google.android.material.R
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.google.android.material.shape.ShapeAppearancePathProvider
+import android.annotation.SuppressLint
+import android.graphics.Path
+import android.graphics.RectF
 
 /**
  * A Card view that clips the content of any shape, this should be done upstream in card,
@@ -24,10 +24,8 @@ class MaskedCardView @JvmOverloads constructor(
     private val pathProvider = ShapeAppearancePathProvider()
     private val path: Path = Path()
     private val shapeAppearance: ShapeAppearanceModel = ShapeAppearanceModel(
-        context,
-        attrs,
-        defStyle,
-        R.style.Widget_MaterialComponents_CardView
+//        context, attrs, defStyle,
+//        R.style.Widget_MaterialComponents_CardView
     )
     private val rectF = RectF(0f, 0f, 0f, 0f)
 

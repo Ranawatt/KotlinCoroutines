@@ -1,11 +1,14 @@
 package com.example.advanced_coroutine.ui
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.advanced_coroutine.Plant
+import com.example.advanced_coroutine.databinding.ListItemPlantBinding
+
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].

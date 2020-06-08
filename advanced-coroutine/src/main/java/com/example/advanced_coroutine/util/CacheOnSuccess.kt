@@ -2,6 +2,7 @@ package com.example.advanced_coroutine.util
 
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -62,7 +63,7 @@ class CacheOnSuccess<T: Any>(
             // only allow one coroutine to try running block at a time by using a coroutine-base
             // Mutex
             val currentDeferred = mutex.withLock {
-                deferred?.let { return@withLock it }
+                deferred?.let {  }
 
                 async {
                     // Note: mutex is not held in this async block

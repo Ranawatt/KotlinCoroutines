@@ -2,6 +2,9 @@ package com.example.advanced_coroutine.util
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
+import com.example.advanced_coroutine.NetworkService
+import com.example.advanced_coroutine.PlantRepository
+import com.example.advanced_coroutine.ui.PlantListViewModelFactory
 
 interface ViewModelFactoryProvider {
     fun providePlantListViewModelFactory(context: Context): PlantListViewModelFactory
