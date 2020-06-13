@@ -35,6 +35,7 @@ android {
 dependencies {
     // dependencies are defined in ext arrays in KotlinCoroutines/build.gradle
     implementation libraries
+    implementation 'androidx.room:room-runtime:2.2.5'
     kapt librariesKapt
     debugImplementation librariesDebug
 
