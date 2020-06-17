@@ -37,7 +37,7 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
     // Request a snackbar to display a string.
     val snackbar: LiveData<String?> get() = _snackBar
     // Update title text via this LiveData
-    val title = repository.title
+    val titles = repository.title
 
     private val _spinner = MutableLiveData<Boolean>(false)
     // Show a loading spinner if true
