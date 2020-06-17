@@ -38,7 +38,7 @@ buildscript {
                 // ViewModel and LiveData
                 "androidx.lifecycle:lifecycle-extensions:$lifecycle_version",
                 "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version",
-                "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-alpha04",
                 // Glide
                 "com.github.bumptech.glide:glide:$glide_version",
                 // network & serialization
@@ -59,6 +59,7 @@ buildscript {
 
         librariesKapt = [
                 "androidx.room:room-compiler:$room_version",
+                "androidx.room:room-ktx:$room_version",
                 "com.github.bumptech.glide:compiler:$glide_version"
         ]
 
