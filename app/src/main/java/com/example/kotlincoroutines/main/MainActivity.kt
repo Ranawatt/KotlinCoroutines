@@ -1,16 +1,11 @@
 package com.example.kotlincoroutines.main
 
-
-import android.app.AppComponentFactory
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlincoroutines.R
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,8 +18,7 @@ class MainActivity : AppCompatActivity(){
         // Get MainViewModel by passing a database to the factory
         val database = getDatabase(this)
         val repository = TitleRepository(getNetworkService(), database.titleDao)
-        val viewModel = ViewModelProviders
-            .of(this, MainViewModel.FACTORY(repository))
+        val viewModel = ViewModelProvider(this, MainViewModel.FACTORY(repository))
             .get(MainViewModel::class.java)
 
         // When rootLayout is clicked call onMainViewClicked in ViewModel
