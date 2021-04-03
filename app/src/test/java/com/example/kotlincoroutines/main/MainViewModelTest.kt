@@ -50,7 +50,7 @@ class MainViewModelTest {
 
     @Test
     fun loadsTitleByDefault() {
-        assertThat(subject.title.getValueForTest()).isEqualTo("initial")
+        assertThat(subject.titles.getValueForTest()).isEqualTo("initial")
     }
 
     @Test
