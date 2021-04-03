@@ -1,4 +1,6 @@
 package com.example.mindorkscoroutine.learn.retrofit.single
 
-class SingleNetworkCallViewModel {
+import androidx.lifecycle.ViewModel
+
+class SingleNetworkCallViewModel : ViewModel() {
 }
