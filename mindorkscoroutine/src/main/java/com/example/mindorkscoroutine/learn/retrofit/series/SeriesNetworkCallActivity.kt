@@ -14,6 +14,7 @@ import com.example.mindorkscoroutine.data.api.RetrofitBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseHelperImpl
 import com.example.mindorkscoroutine.data.model.ApiUser
+import com.example.mindorkscoroutine.learn.base.ApiUserAdapter
 import com.example.mindorkscoroutine.learn.base.UserAdapter
 import com.example.mindorkscoroutine.utils.Status
 import com.example.mindorkscoroutine.utils.ViewModelFactory
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_single_network_call.*
 class SeriesNetworkCallActivity : AppCompatActivity() {
 
     private lateinit var viewModel: SeriesNetworkCallViewModel
-    private lateinit var adapter: UserAdapter
+    private lateinit var adapter: ApiUserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,9 @@ class SeriesNetworkCallActivity : AppCompatActivity() {
 
     private fun setupUI() {
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ApiUserAdapter(
+            arrayListOf()
+        )
         recyclerView.addItemDecoration(
             DividerItemDecoration(recyclerView.context, (recyclerView.layoutManager as LinearLayoutManager).orientation)
         )
@@ -63,6 +67,7 @@ class SeriesNetworkCallActivity : AppCompatActivity() {
                     recyclerView.visibility = View.GONE
                 }
                 Status.ERROR -> {
+                    progressBar.visibility = View.VISIBLE
                     Toast.makeText(this, "Unable to laod data", Toast.LENGTH_LONG).show()
                 }
             }

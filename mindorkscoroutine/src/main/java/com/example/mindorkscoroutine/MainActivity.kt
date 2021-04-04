@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun startSingleNetworkCallActivity(view: View) {
+    fun singleNetworkCallActivity(view: View) {
         startActivity(Intent(this, SingleNetworkCallActivity::class.java))
     }
     fun seriesNetworkCallActivity(view: View) {

@@ -5,15 +5,12 @@ import androidx.room.Room
 
 object DatabaseBuilder {
 
-    private var INSTANCE: AppDatabase? = null
+    @Volatile private var INSTANCE: AppDatabase? = null
 
     fun getInstance(context: Context): AppDatabase {
-        if (INSTANCE == null) {
-            synchronized(AppDatabase::class) {
-                INSTANCE = buildRoomDB(context)
-            }
+        return INSTANCE ?: synchronized(AppDatabase::class) {
+                INSTANCE?: buildRoomDB(context).also { INSTANCE = it }
         }
-        return INSTANCE!!
     }
 
     private fun buildRoomDB(context: Context) =
