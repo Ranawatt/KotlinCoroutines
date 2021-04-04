@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mindorkscoroutine.R
 import com.example.mindorkscoroutine.data.local.entity.User
+import com.example.mindorkscoroutine.data.model.ApiUser
 import kotlinx.android.synthetic.main.item_layout.view.*
 
-class UserAdapter(private val users: ArrayList<User>) : RecyclerView.Adapter<UserAdapter.DataViewHolder>() {
+class UserAdapter(private val users: ArrayList<ApiUser>) : RecyclerView.Adapter<UserAdapter.DataViewHolder>() {
 
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bind(user: User) {
+        fun bind(user: ApiUser) {
             itemView.textViewUserName.text = user.name
             itemView.textViewUserEmail.text = user.email
             Glide.with(itemView.imageViewAvatar.context)
@@ -30,4 +31,8 @@ class UserAdapter(private val users: ArrayList<User>) : RecyclerView.Adapter<Use
     }
 
     override fun getItemCount(): Int = users.size
+
+    fun addData(user: List<ApiUser>) {
+        users.addAll(user)
+    }
 }

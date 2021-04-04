@@ -2,6 +2,9 @@ package com.example.mindorkscoroutine.learn.retrofit.series
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +13,9 @@ import com.example.mindorkscoroutine.data.api.ApiHelperImpl
 import com.example.mindorkscoroutine.data.api.RetrofitBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseHelperImpl
+import com.example.mindorkscoroutine.data.model.ApiUser
 import com.example.mindorkscoroutine.learn.base.UserAdapter
+import com.example.mindorkscoroutine.utils.Status
 import com.example.mindorkscoroutine.utils.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_single_network_call.*
 
@@ -44,6 +49,28 @@ class SeriesNetworkCallActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        viewModel
+        viewModel.getUsers().observe(this, Observer {
+            when(it.status){
+                Status.SUCCESS -> {
+                    progressBar.visibility = View.GONE
+                    it.data?.let {
+                        users -> renderList(users)
+                    }
+                    recyclerView.visibility = View.VISIBLE
+                }
+                Status.LOADING -> {
+                    progressBar.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    Toast.makeText(this, "Unable to laod data", Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+    }
+
+    private fun renderList(users: List<ApiUser>) {
+        adapter.addData(users)
+        adapter.notifyDataSetChanged()
     }
 }
