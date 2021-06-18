@@ -40,7 +40,8 @@ class PlantRepository private constructor(
         val customSortOrder = plantsListSortOrderCache.getOrAwait()
 
         // Map the LiveData, applying the sort criteria
-        emitSource(plantsLiveData.map { plantList -> plantList.applySort(customSortOrder) })
+        emitSource(plantsLiveData.map {
+                plantList -> plantList.applySort(customSortOrder) })
     }
 
     /**
