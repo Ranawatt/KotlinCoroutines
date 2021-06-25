@@ -43,6 +43,6 @@ class RoomDBActivity: AppCompatActivity() {
     }
 
     private fun setupObsever() {
-        TODO("Not yet implemented")
+
     }
 }
