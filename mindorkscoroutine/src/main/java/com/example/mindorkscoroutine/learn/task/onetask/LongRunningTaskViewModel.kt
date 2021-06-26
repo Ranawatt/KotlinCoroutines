@@ -4,15 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mindorkscoroutine.data.api.ApiHelper
+import com.example.mindorkscoroutine.data.local.entity.User
+import com.example.mindorkscoroutine.data.model.ApiUser
 import com.example.mindorkscoroutine.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LongRunningTaskViewModel: ViewModel() {
+class LongRunningTaskViewModel(private val apiHelper: ApiHelper): ViewModel() {
 
-    private val status = MutableLiveData<Resource<String>>()
+    private val status =  MutableLiveData<Resource<List<ApiUser>>>()
 
     init {
         startLongRunningTasks()
@@ -20,10 +23,10 @@ class LongRunningTaskViewModel: ViewModel() {
 
     private fun startLongRunningTasks() {
         viewModelScope.launch {
-            status.postValue(Resource.loading(null))
             try {
                doLongRunningTask()
-                status.postValue(Resource.success("Task Completed"))
+                val users = apiHelper.getUsers()
+                status.postValue(Resource.success(users))
             }catch (e: Exception) {
                 status.postValue(Resource.error("Something Went Wrong ", null))
             }
@@ -38,7 +41,7 @@ class LongRunningTaskViewModel: ViewModel() {
     }
 
 
-    fun getStatus(): LiveData<Resource<String>> {
+    fun getStatus(): LiveData<Resource<List<ApiUser>>> {
         return status
     }
 }
