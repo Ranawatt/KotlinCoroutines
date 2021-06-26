@@ -25,8 +25,8 @@ class RoomDBActivity: AppCompatActivity() {
 
     private lateinit var viewmodel: RoomViewModel
     private lateinit var userAdapter: UserAdapter
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_network_call)
         setupUI()
         setupViewModel()
@@ -74,6 +74,5 @@ class RoomDBActivity: AppCompatActivity() {
         userAdapter.addData(users)
         userAdapter.notifyDataSetChanged()
     }
-
 
 }
