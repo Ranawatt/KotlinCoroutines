@@ -28,7 +28,7 @@ class RoomViewModel(private val apiHelper: ApiHelper,
                     val usersFromApi = apiHelper.getUsers()
                     val usersToInsertInDB = mutableListOf<User>()
 
-                    for(apiUser in usersFromDB){
+                    for(apiUser in usersFromApi){
                         val user = User(
                             apiUser.id,
                             apiUser.name,
