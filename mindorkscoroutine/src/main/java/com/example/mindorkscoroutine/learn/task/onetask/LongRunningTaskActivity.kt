@@ -67,6 +67,7 @@ class LongRunningTaskActivity: AppCompatActivity() {
                 }
             }
         })
+        viewModel.startLongRunningTasks()
 
     }
 

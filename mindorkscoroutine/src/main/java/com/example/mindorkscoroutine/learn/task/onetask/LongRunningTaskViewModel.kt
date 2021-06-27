@@ -21,7 +21,7 @@ class LongRunningTaskViewModel(private val apiHelper: ApiHelper): ViewModel() {
         startLongRunningTasks()
     }
 
-    private fun startLongRunningTasks() {
+    fun startLongRunningTasks() {
         viewModelScope.launch {
             try {
                doLongRunningTask()
