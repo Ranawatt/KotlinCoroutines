@@ -14,10 +14,7 @@ import com.example.mindorkscoroutine.data.local.DatabaseBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseHelperImpl
 import com.example.mindorkscoroutine.data.model.ApiUser
 import com.example.mindorkscoroutine.learn.base.ApiUserAdapter
-import com.example.mindorkscoroutine.utils.Status
-import com.example.mindorkscoroutine.utils.ViewModelFactory
-import com.example.mindorkscoroutine.utils.gone
-import com.example.mindorkscoroutine.utils.visible
+import com.example.mindorkscoroutine.utils.*
 import kotlinx.android.synthetic.main.activity_single_network_call.*
 
 class TimeoutActivity: AppCompatActivity() {
@@ -55,6 +52,14 @@ class TimeoutActivity: AppCompatActivity() {
                     progressBar.gone()
                     it.data?.let { user -> renderList(user) }
                     recyclerView.visible()
+                }
+                Status.LOADING -> {
+                    progressBar.visible()
+                    recyclerView.invisible()
+                }
+                Status.ERROR -> {
+                    progressBar.gone()
+                    showToast(R.string.network_error)
                 }
             }
         })

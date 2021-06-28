@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mindorkscoroutine</string>
+    <string name="network_error">Something Went Wrong</string>
 </resources>

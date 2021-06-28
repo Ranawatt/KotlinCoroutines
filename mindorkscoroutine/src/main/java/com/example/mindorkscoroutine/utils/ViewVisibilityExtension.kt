@@ -1,6 +1,9 @@
 package com.example.mindorkscoroutine.utils
 
+import android.app.Activity
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.StringRes
 
 /* Set the View Visibility to VISIBLE and eventually animate the view alpha till 100% */
 fun View.visible() {
@@ -28,3 +31,7 @@ fun View.visibleOrGone(show: Boolean) {
     if (show) visible() else gone()
 }
 
+fun Activity.showToast(@StringRes message: Int) {
+    Toast.makeText(this.applicationContext,
+         this.applicationContext.getText(message), Toast.LENGTH_SHORT).show()
+}
