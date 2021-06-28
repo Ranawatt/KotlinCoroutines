@@ -34,6 +34,7 @@ class RoomDBActivity: AppCompatActivity() {
     }
 
     private fun setupUI() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
         userAdapter = UserAdapter(arrayListOf())
         recyclerView.addItemDecoration(DividerItemDecoration(this,
             (recyclerView.layoutManager as LinearLayoutManager).orientation
