@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation libraries
     implementation arch_libraries
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     kapt librariesKapt
     testImplementation testLibraries
     androidTestImplementation androidTestLibraries
