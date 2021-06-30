@@ -1,13 +1,16 @@
 package com.example.mindorkscoroutine.utils
 
 import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.example.mindorkscoroutine.R
 import com.google.android.material.snackbar.Snackbar
 import java.util.concurrent.TimeUnit
 
@@ -57,6 +60,22 @@ fun View?.layoutInflater() {
 fun Fragment?.layoutInflater() {
     LayoutInflater.from(this?.requireContext())
 }
+
+fun Fragment.setupRefreshLayout(
+    refreshLayout: ScrollChildSwipeRefreshLayout,
+    scrollUpChild: View?= null) {
+
+    refreshLayout.setColorSchemeColors(
+        ContextCompat.getColor(requireActivity(), R.color.colorAccent),
+        ContextCompat.getColor(requireActivity(), R.color.colorPrimary),
+        ContextCompat.getColor(requireActivity(), R.color.colorPrimaryDark)
+    )
+
+    scrollUpChild?.let {
+        refreshLayout.scrollUpChild = it
+    }
+}
+
 fun Activity.showToast(@StringRes message: Int) {
     Toast.makeText(this.applicationContext,
          this.applicationContext.getText(message), Toast.LENGTH_SHORT).show()
