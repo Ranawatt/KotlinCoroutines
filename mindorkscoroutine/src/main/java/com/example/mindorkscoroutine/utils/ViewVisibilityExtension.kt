@@ -1,18 +1,14 @@
 package com.example.mindorkscoroutine.utils
 
 import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import com.example.mindorkscoroutine.R
 import com.google.android.material.snackbar.Snackbar
-import java.util.concurrent.TimeUnit
 
 /* Set the View Visibility to VISIBLE and eventually animate the view alpha till 100% */
 fun View.visible() {
