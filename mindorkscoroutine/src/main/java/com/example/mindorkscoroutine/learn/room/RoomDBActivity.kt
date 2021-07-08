@@ -2,6 +2,8 @@ package com.example.mindorkscoroutine.learn.room
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.ContextMenu
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -76,4 +78,11 @@ class RoomDBActivity: AppCompatActivity() {
         userAdapter.notifyDataSetChanged()
     }
 
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+    }
 }
