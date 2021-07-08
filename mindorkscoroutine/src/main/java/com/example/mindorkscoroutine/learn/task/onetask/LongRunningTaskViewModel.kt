@@ -36,7 +36,7 @@ class LongRunningTaskViewModel(private val apiHelper: ApiHelper): ViewModel() {
 
     private suspend fun doLongRunningTask() {
         withContext(Dispatchers.Default) {
-            delay(1000)
+            delay(100)
         }
     }
 

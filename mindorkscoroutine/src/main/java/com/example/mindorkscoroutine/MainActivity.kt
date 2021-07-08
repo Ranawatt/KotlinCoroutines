@@ -8,6 +8,7 @@ import com.example.mindorkscoroutine.learn.retrofit.series.SeriesNetworkCallActi
 import com.example.mindorkscoroutine.learn.retrofit.single.SingleNetworkCallActivity
 import com.example.mindorkscoroutine.learn.room.RoomDBActivity
 import com.example.mindorkscoroutine.learn.task.onetask.LongRunningTaskActivity
+import com.example.mindorkscoroutine.learn.timeout.TimeoutActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,5 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     fun roomDatabaseCallActivity(view: View) {
         startActivity(Intent(this, RoomDBActivity::class.java))
+    }
+
+    fun timeOutCallActivity(view: View) {
+        startActivity(Intent(this, TimeoutActivity::class.java))
     }
 }

@@ -37,6 +37,7 @@ class TimeoutActivity: AppCompatActivity() {
             (recyclerView.layoutManager as LinearLayoutManager).orientation)
         )
         recyclerView.adapter = apiUserAdapter
+        recyclerView.hasFixedSize()
     }
 
     private fun setupViewModel() {
