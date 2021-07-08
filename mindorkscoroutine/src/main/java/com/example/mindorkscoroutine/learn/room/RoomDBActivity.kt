@@ -1,11 +1,16 @@
 package com.example.mindorkscoroutine.learn.room
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.ContextMenu
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -78,11 +83,21 @@ class RoomDBActivity: AppCompatActivity() {
         userAdapter.notifyDataSetChanged()
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu?,
-        v: View?,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+//        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
+            setOnQueryTextListener(object : OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    userAdapter?.filter.filter(newText)
+                    return true
+                }
+            })
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 }
