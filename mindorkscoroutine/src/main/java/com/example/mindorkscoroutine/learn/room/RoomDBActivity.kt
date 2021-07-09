@@ -93,7 +93,7 @@ class RoomDBActivity: AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    userAdapter?.filter.filter(newText)
+                    userAdapter.filter.filter(newText)
                     return true
                 }
             })

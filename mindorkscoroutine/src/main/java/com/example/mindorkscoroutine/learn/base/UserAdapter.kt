@@ -12,9 +12,10 @@ import com.example.mindorkscoroutine.data.local.entity.User
 import com.example.mindorkscoroutine.data.model.ApiUser
 import kotlinx.android.synthetic.main.item_layout.view.*
 
-class UserAdapter(private val users: ArrayList<User>, private var searchableUsers: ArrayList<User>? = null)
+class UserAdapter(private val users: ArrayList<User>)
     : RecyclerView.Adapter<UserAdapter.DataViewHolder>(), Filterable{
 
+    private var searchableUsers: ArrayList<User>
     init {
         searchableUsers = users
     }
@@ -45,14 +46,14 @@ class UserAdapter(private val users: ArrayList<User>, private var searchableUser
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val resultList = ArrayList<User>()
                 val charSearch = constraint.toString();
                 if (charSearch.isEmpty()){
-                    searchableUsers = users as ArrayList<User>
+                    searchableUsers
                 }else{
-                    val resultList = ArrayList<User>()
-                    for (row in resultList){
-                        if (row.name!!.toLowerCase().contains(charSearch.toLowerCase())){
-                            resultList.add(row)
+                    for (user in users){
+                        if (user.name!!.toLowerCase().contains(charSearch)){
+                            resultList.add(user)
                         }
                     }
                     searchableUsers = resultList
@@ -63,7 +64,7 @@ class UserAdapter(private val users: ArrayList<User>, private var searchableUser
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                searchableUsers = results?.values as ArrayList<User>?
+                searchableUsers = (results?.values as ArrayList<User>?)!!
                 notifyDataSetChanged()
             }
         }
