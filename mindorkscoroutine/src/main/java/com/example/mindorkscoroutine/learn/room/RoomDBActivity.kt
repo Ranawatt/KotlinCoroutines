@@ -16,22 +16,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mindorkscoroutine.R
+import com.example.mindorkscoroutine.RecyclerViewClick
 import com.example.mindorkscoroutine.data.api.ApiHelperImpl
 import com.example.mindorkscoroutine.data.api.RetrofitBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseBuilder
 import com.example.mindorkscoroutine.data.local.DatabaseHelperImpl
 import com.example.mindorkscoroutine.data.local.entity.User
 import com.example.mindorkscoroutine.learn.base.UserAdapter
-import com.example.mindorkscoroutine.utils.Status
-import com.example.mindorkscoroutine.utils.ViewModelFactory
-import com.example.mindorkscoroutine.utils.gone
-import com.example.mindorkscoroutine.utils.visible
+import com.example.mindorkscoroutine.utils.*
 import kotlinx.android.synthetic.main.activity_single_network_call.*
 
-class RoomDBActivity: AppCompatActivity() {
-
+class RoomDBActivity: AppCompatActivity(), RecyclerViewClick {
+    private lateinit var recyclerViewClick: RecyclerViewClick
     private lateinit var viewmodel: RoomViewModel
     private lateinit var userAdapter: UserAdapter
+    private var arrayList = ArrayList<User>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single_network_call)
@@ -80,6 +79,7 @@ class RoomDBActivity: AppCompatActivity() {
 
     private fun renderList(users: List<User>) {
         userAdapter.addData(users)
+        arrayList.addAll(users)
         userAdapter.notifyDataSetChanged()
     }
 
@@ -99,5 +99,16 @@ class RoomDBActivity: AppCompatActivity() {
             })
         }
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onItemClick(position: Int) {
+        showToast(R.string.network_error)
+    }
+
+    override fun onLongItemClick(position: Int): Boolean {
+        arrayList.removeAt(position)
+        userAdapter.addData(arrayList)
+        userAdapter.notifyDataSetChanged()
+        return true
     }
 }
